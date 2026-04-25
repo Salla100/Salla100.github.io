@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post — Sven Amberg</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Sven<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cv.html">CV</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div id="post-container">
+      <div class="loading" style="padding-top: 80px;">Loading…</div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">© 2026 Sven Amberg</span>
+    <div class="footer-links">
+      <a href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:your@email.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  function formatDate(d) {
+    return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+
+  if (!id) {
+    window.location.href = 'blog.html';
+  }
+
+  fetch('data/posts.json')
+    .then(r => r.json())
+    .then(posts => {
+      const post = posts.find(p => p.id === id);
+      const container = document.getElementById('post-container');
+
+      if (!post) {
+        container.innerHTML = `
+          <div class="hero">
+            <h1>Post not found</h1>
+            <p class="lead">This post doesn't exist or was removed.</p>
+            <a href="blog.html" class="btn btn-outline" style="margin-top:8px;">← Back to blog</a>
+          </div>`;
+        return;
+      }
+
+      document.title = `${post.title} — Sven Amberg`;
+
+      container.innerHTML = `
+        <div class="hero" style="padding-bottom: 32px;">
+          <a href="blog.html" style="font-size:0.85rem; color:var(--text-subtle); display:inline-flex; align-items:center; gap:4px; margin-bottom:24px;">
+            ← All posts
+          </a>
+          <div class="post-meta" style="margin-bottom: 16px;">
+            <span>${formatDate(post.date)}</span>
+            ${post.tags.map(t => `<span class="post-tag">${t}</span>`).join('')}
+          </div>
+          <h1 style="font-size: clamp(1.6rem, 4vw, 2.4rem);">${post.title}</h1>
+        </div>
+        <section class="section" style="border-top: 1px solid var(--border); padding-top: 40px;">
+          <div class="post-content">
+            ${post.content}
+          </div>
+        </section>
+        <div style="padding: 40px 0 20px;">
+          <a href="blog.html" class="btn btn-outline">← Back to blog</a>
+        </div>`;
+    })
+    .catch(() => {
+      document.getElementById('post-container').innerHTML =
+        '<div class="empty-state" style="padding-top:80px;"><p>Could not load post.</p></div>';
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Sven Amberg</title>
+  <meta name="description" content="Blog posts by Sven Amberg." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">Sven<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cv.html">CV</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+
+    <section class="hero">
+      <div class="hero-tag">Writing</div>
+      <h1>Blog</h1>
+      <p class="lead">Thoughts on things I'm building, learning, and thinking about.</p>
+    </section>
+
+    <section class="section" style="border-top: none; padding-top: 0;">
+      <div id="posts-list">
+        <div class="loading">Loading posts…</div>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-text">© 2026 Sven Amberg</span>
+    <div class="footer-links">
+      <a href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:your@email.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  function formatDate(d) {
+    return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  }
+
+  fetch('data/posts.json')
+    .then(r => r.json())
+    .then(posts => {
+      const container = document.getElementById('posts-list');
+
+      if (!posts.length) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="icon">✏️</div>
+            <p>No posts yet — check back soon.</p>
+          </div>`;
+        return;
+      }
+
+      // Sort newest first
+      posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      // Group by year
+      const byYear = {};
+      posts.forEach(p => {
+        const year = new Date(p.date).getFullYear();
+        if (!byYear[year]) byYear[year] = [];
+        byYear[year].push(p);
+      });
+
+      let html = '';
+      Object.keys(byYear).sort((a, b) => b - a).forEach(year => {
+        html += `<div style="margin-bottom: 40px;">
+          <div class="section-label" style="margin-bottom: 16px;">${year}</div>
+          <div class="card-grid">`;
+        byYear[year].forEach(p => {
+          html += `
+            <a href="post.html?id=${p.id}" class="card blog-post-item">
+              <div class="post-meta">
+                <span>${formatDate(p.date)}</span>
+                ${p.tags.map(t => `<span class="post-tag">${t}</span>`).join('')}
+              </div>
+              <div class="post-title">${p.title}</div>
+              <div class="post-excerpt">${p.excerpt}</div>
+            </a>`;
+        });
+        html += `</div></div>`;
+      });
+
+      container.innerHTML = html;
+    })
+    .catch(() => {
+      document.getElementById('posts-list').innerHTML =
+        '<div class="empty-state"><p>Could not load posts.</p></div>';
+    });
+</script>
+</body>
+</html>

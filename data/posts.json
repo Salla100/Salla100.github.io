@@ -1,0 +1,10 @@
+[
+  {
+    "id": "hello-world",
+    "title": "Hello World — Starting My Blog",
+    "date": "2026-04-25",
+    "tags": ["Personal"],
+    "excerpt": "A brief intro to why I'm starting this blog and what I plan to write about.",
+    "content": "<p>Welcome to my blog! This is the first post and a chance to set expectations for what I'll write about here.</p><p>I plan to share thoughts on projects I'm working on, things I've learned, and anything else I find interesting. If you're reading this — welcome aboard.</p>"
+  }
+]
