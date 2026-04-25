@@ -1,0 +1,66 @@
+{
+  "experience": [
+    {
+      "title": "OPS-SAT Space Lab Intern",
+      "org": "ESA ESOC — Darmstadt, Germany",
+      "dates": "Sep 2025 – Jan 2026",
+      "bullets": [
+        "Developed precise orbit determination algorithm using GNSS data",
+        "Supported experimenters running experiments on live satellites",
+        "Supported satellite design through CDR and IRR phases",
+        "Set up testbenches for OPS-SAT satellite systems"
+      ],
+      "desc": ""
+    },
+    {
+      "title": "Summer Engineering Intern",
+      "org": "Space Norway — Oslo, Norway",
+      "dates": "Summer 2023",
+      "bullets": [
+        "Researched and simulated use of in-house satellites as ship SOS relays",
+        "Used GNU Radio, Python, and ML to simulate ship SOS and satellite movements"
+      ],
+      "desc": ""
+    },
+    {
+      "title": "CFO & Electronics Engineer",
+      "org": "ORBIT NTNU — Student satellite organisation",
+      "dates": "2020 – 2023",
+      "bullets": [
+        "Led key accounts team; managed budget exceeding 1M NOK during SelfieSat launch",
+        "Designed PCB for BioSat; electronics design, soldering, cabling",
+        "Led electronics design for Sub-Orbital team in 2020",
+        "Built payload for Propulse NTNU — 1st place"
+      ],
+      "desc": ""
+    },
+    {
+      "title": "Electronics & Systems Engineer",
+      "org": "BEARS at TU Berlin — Exchange year",
+      "dates": "2023 – 2024",
+      "bullets": [],
+      "desc": "Electronics design, assembly, testing, and system design for Wobble 2 and Astrogrip satellite projects."
+    }
+  ],
+  "education": [
+    {
+      "title": "Integrated Master's in Electronic System Design and Innovation",
+      "org": "NTNU — Trondheim, Norway",
+      "dates": "2020 – 2026",
+      "bullets": [],
+      "desc": "Specialisation in Space Systems. Topics: PCB design, IoT, GNSS, signal processing, satellite design, systems engineering. Year abroad at TU Berlin (2023–24)."
+    }
+  ],
+  "skills": [
+    { "category": "Electronics", "items": ["PCB design", "Altium", "KiCad", "Soldering", "Assembly", "Testing"] },
+    { "category": "Systems",     "items": ["Systems engineering", "SysML", "Integration", "CDR/IRR"] },
+    { "category": "Software",    "items": ["Python", "GNU Radio", "C++", "MATLAB", "Verilog", "TensorFlow", "Git"] },
+    { "category": "Space",       "items": ["GNSS", "Orbit determination", "Satellite ops", "Payload dev"] },
+    { "category": "Signal / ML", "items": ["Signal processing", "Machine learning", "IoT", "FEM"] }
+  ],
+  "publication": {
+    "year": "2024",
+    "title": "Design Thinking and Shared Ignorance as a Framework for Student–Faculty Partnerships",
+    "journal": "International Journal for Students as Partners, 2024"
+  }
+}

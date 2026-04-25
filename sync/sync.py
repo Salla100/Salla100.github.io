@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Syncs Notion databases → website JSON data files.
+Syncs Notion content → website JSON data files.
 Run by GitHub Actions daily, or manually: python sync/sync.py
 Requires NOTION_TOKEN environment variable.
 """
@@ -16,9 +16,10 @@ if not NOTION_TOKEN:
     print("ERROR: NOTION_TOKEN environment variable not set.", file=sys.stderr)
     sys.exit(1)
 
-# Database IDs (from Personal Website CMS in Notion)
-BLOG_DB_ID   = "5738f1ddecbe4e8590f1c0fc00991c1d"
+# Notion page / database IDs
+BLOG_DB_ID    = "5738f1ddecbe4e8590f1c0fc00991c1d"
 PROJECT_DB_ID = "218c0cf02d264005834df08af755ae58"
+CV_PAGE_ID    = "34d5ca8db920812a81e8faabe6665592"
 
 HEADERS = {
     "Authorization": f"Bearer {NOTION_TOKEN}",
@@ -39,13 +40,9 @@ def notion_post(path, body):
     return r.json()
 
 def db_query(db_id, body):
-    """Query a database, handling pagination."""
-    results = []
-    cursor = None
+    results, cursor = [], None
     while True:
-        payload = {**body}
-        if cursor:
-            payload["start_cursor"] = cursor
+        payload = {**body, **({"start_cursor": cursor} if cursor else {})}
         data = notion_post(f"/databases/{db_id}/query", payload)
         results.extend(data.get("results", []))
         if not data.get("has_more"):
@@ -53,158 +50,206 @@ def db_query(db_id, body):
         cursor = data.get("next_cursor")
     return results
 
-# ── Rich text / block → HTML ──────────────────────────────────────────────────
+def get_blocks(block_id):
+    data = notion_get(f"/blocks/{block_id}/children?page_size=100")
+    return data.get("results", [])
 
-def rt_to_html(rich_texts):
-    """Convert a Notion rich_text array to an HTML string."""
+# ── Rich-text helpers ─────────────────────────────────────────────────────────
+
+def rt_plain(rts):
+    return "".join(rt.get("plain_text", "") for rt in rts)
+
+def rt_html(rts):
     out = ""
-    for rt in rich_texts:
+    for rt in rts:
         text = rt.get("plain_text", "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
         ann = rt.get("annotations", {})
-        if ann.get("code"):
-            text = f"<code>{text}</code>"
-        if ann.get("bold"):
-            text = f"<strong>{text}</strong>"
-        if ann.get("italic"):
-            text = f"<em>{text}</em>"
-        if ann.get("strikethrough"):
-            text = f"<s>{text}</s>"
-        href = rt.get("href")
-        if href:
-            text = f'<a href="{href}">{text}</a>'
+        if ann.get("code"):        text = f"<code>{text}</code>"
+        if ann.get("bold"):        text = f"<strong>{text}</strong>"
+        if ann.get("italic"):      text = f"<em>{text}</em>"
+        if ann.get("strikethrough"): text = f"<s>{text}</s>"
+        if rt.get("href"):         text = f'<a href="{rt["href"]}">{text}</a>'
         out += text
     return out
 
 def blocks_to_html(page_id):
-    """Fetch a page's blocks and convert to HTML."""
-    data = notion_get(f"/blocks/{page_id}/children?page_size=100")
-    blocks = data.get("results", [])
-    html_parts = []
-    list_buffer = []  # accumulate list items
-    list_type = None  # "ul" or "ol"
+    """Convert a page's blocks to an HTML string (for blog posts)."""
+    blocks = get_blocks(page_id)
+    parts, list_buf, list_tag = [], [], None
 
     def flush_list():
-        nonlocal list_buffer, list_type
-        if list_buffer:
-            items = "".join(f"<li>{item}</li>" for item in list_buffer)
-            html_parts.append(f"<{list_type}>{items}</{list_type}>")
-            list_buffer = []
-            list_type = None
+        nonlocal list_buf, list_tag
+        if list_buf:
+            items = "".join(f"<li>{i}</li>" for i in list_buf)
+            parts.append(f"<{list_tag}>{items}</{list_tag}>")
+            list_buf, list_tag = [], None
 
-    for block in blocks:
-        bt = block["type"]
-
+    for b in blocks:
+        bt = b["type"]
         if bt == "bulleted_list_item":
-            if list_type != "ul":
-                flush_list()
-                list_type = "ul"
-            list_buffer.append(rt_to_html(block[bt]["rich_text"]))
-            continue
-
+            if list_tag != "ul": flush_list(); list_tag = "ul"
+            list_buf.append(rt_html(b[bt]["rich_text"])); continue
         if bt == "numbered_list_item":
-            if list_type != "ol":
-                flush_list()
-                list_type = "ol"
-            list_buffer.append(rt_to_html(block[bt]["rich_text"]))
+            if list_tag != "ol": flush_list(); list_tag = "ol"
+            list_buf.append(rt_html(b[bt]["rich_text"])); continue
+        flush_list()
+        if bt == "paragraph":
+            inner = rt_html(b["paragraph"]["rich_text"])
+            if inner.strip(): parts.append(f"<p>{inner}</p>")
+        elif bt == "heading_2":
+            parts.append(f"<h2>{rt_html(b['heading_2']['rich_text'])}</h2>")
+        elif bt == "heading_3":
+            parts.append(f"<h3>{rt_html(b['heading_3']['rich_text'])}</h3>")
+        elif bt == "code":
+            lang = b["code"].get("language", "")
+            inner = rt_html(b["code"]["rich_text"])
+            parts.append(f'<pre><code class="language-{lang}">{inner}</code></pre>')
+        elif bt == "quote":
+            parts.append(f"<blockquote>{rt_html(b['quote']['rich_text'])}</blockquote>")
+        elif bt == "divider":
+            parts.append("<hr>")
+    flush_list()
+    return "".join(parts)
+
+# ── Property helpers (databases) ──────────────────────────────────────────────
+
+def prop_text(p):   return "".join(rt["plain_text"] for rt in (p.get("rich_text") or []))
+def prop_title(p):  return "".join(rt["plain_text"] for rt in (p.get("title") or []))
+def prop_select(p): s = p.get("select"); return s["name"] if s else ""
+def prop_multi(p):  return [o["name"] for o in (p.get("multi_select") or [])]
+def prop_date(p):   d = p.get("date"); return d["start"] if d else ""
+def prop_url(p):    return p.get("url") or ""
+def prop_num(p):    return p.get("number") or 0
+
+def slugify(t):
+    s = re.sub(r"[^\w\s-]", "", t.lower())
+    return re.sub(r"-+", "-", re.sub(r"[\s_]+", "-", s.strip()))
+
+# ── CV page parser ────────────────────────────────────────────────────────────
+
+def parse_org_dates(paragraph_block):
+    """Split '**Company — Location** · Sep 2025 – Jan 2026' into (org, dates)."""
+    text = rt_plain(paragraph_block["paragraph"]["rich_text"])
+    if " · " in text:
+        org, _, dates = text.partition(" · ")
+        return org.strip(), dates.strip()
+    return text.strip(), ""
+
+def sync_cv():
+    blocks = get_blocks(CV_PAGE_ID)
+    cv = {"experience": [], "education": [], "skills": [], "publication": None}
+
+    section      = None
+    entry        = None
+    entry_state  = "org"   # "org" → expecting org/dates line, "desc" → expecting bullets/desc
+    pub_lines    = []
+
+    def flush_entry():
+        nonlocal entry, entry_state
+        if entry and section in ("experience", "education"):
+            cv[section].append(entry)
+        entry, entry_state = None, "org"
+
+    for b in blocks:
+        bt = b["type"]
+
+        # ── Section headings ──
+        if bt == "heading_2":
+            flush_entry()
+            t = rt_plain(b["heading_2"]["rich_text"]).lower()
+            if   "experience"   in t: section = "experience"
+            elif "education"    in t: section = "education"
+            elif "skill"        in t: section = "skills"
+            elif "publication"  in t: section = "publication"
+            else:                     section = None
             continue
 
-        flush_list()
+        # ── Experience / Education entries ──
+        if bt == "heading_3" and section in ("experience", "education"):
+            flush_entry()
+            entry = {"title": rt_plain(b["heading_3"]["rich_text"]),
+                     "org": "", "dates": "", "bullets": [], "desc": ""}
+            entry_state = "org"
+            continue
 
-        if bt == "paragraph":
-            inner = rt_to_html(block["paragraph"]["rich_text"])
-            if inner.strip():
-                html_parts.append(f"<p>{inner}</p>")
+        if bt == "paragraph" and section in ("experience", "education") and entry:
+            if entry_state == "org":
+                entry["org"], entry["dates"] = parse_org_dates(b)
+                entry_state = "desc"
+            else:
+                t = rt_plain(b["paragraph"]["rich_text"]).strip()
+                if t: entry["desc"] = t
+            continue
 
-        elif bt == "heading_2":
-            inner = rt_to_html(block["heading_2"]["rich_text"])
-            html_parts.append(f"<h2>{inner}</h2>")
+        if bt == "bulleted_list_item" and section in ("experience", "education") and entry:
+            entry_state = "desc"
+            entry["bullets"].append(rt_plain(b["bulleted_list_item"]["rich_text"]))
+            continue
 
-        elif bt == "heading_3":
-            inner = rt_to_html(block["heading_3"]["rich_text"])
-            html_parts.append(f"<h3>{inner}</h3>")
+        # ── Skills ──
+        if bt == "paragraph" and section == "skills":
+            text = rt_plain(b["paragraph"]["rich_text"])
+            if ":" in text:
+                cat, _, rest = text.partition(":")
+                items = [i.strip() for i in rest.split(",") if i.strip()]
+                cv["skills"].append({"category": cat.strip(), "items": items})
+            continue
 
-        elif bt == "code":
-            inner = rt_to_html(block["code"]["rich_text"])
-            lang = block["code"].get("language", "")
-            html_parts.append(f'<pre><code class="language-{lang}">{inner}</code></pre>')
+        # ── Publication ──
+        if section == "publication" and bt in ("paragraph", "heading_3"):
+            t = rt_plain(b[bt]["rich_text"]).strip()
+            if t: pub_lines.append(t)
 
-        elif bt == "quote":
-            inner = rt_to_html(block["quote"]["rich_text"])
-            html_parts.append(f"<blockquote>{inner}</blockquote>")
+    flush_entry()
 
-        elif bt == "divider":
-            html_parts.append("<hr>")
+    if pub_lines:
+        year = ""
+        for line in pub_lines:
+            m = re.search(r"\b(20\d{2})\b", line)
+            if m: year = m.group(1); break
+        cv["publication"] = {
+            "year":    year,
+            "title":   pub_lines[0] if pub_lines else "",
+            "journal": pub_lines[1] if len(pub_lines) > 1 else "",
+        }
 
-    flush_list()
-    return "".join(html_parts)
+    return cv
 
-# ── Property helpers ──────────────────────────────────────────────────────────
-
-def prop_text(prop):
-    return "".join(rt["plain_text"] for rt in (prop.get("rich_text") or []))
-
-def prop_title(prop):
-    return "".join(rt["plain_text"] for rt in (prop.get("title") or []))
-
-def prop_select(prop):
-    sel = prop.get("select")
-    return sel["name"] if sel else ""
-
-def prop_multiselect(prop):
-    return [opt["name"] for opt in (prop.get("multi_select") or [])]
-
-def prop_date(prop):
-    d = prop.get("date")
-    return d["start"] if d else ""
-
-def prop_url(prop):
-    return prop.get("url") or ""
-
-def prop_number(prop):
-    return prop.get("number") or 0
-
-def slugify(title):
-    s = title.lower()
-    s = re.sub(r"[^\w\s-]", "", s)
-    s = re.sub(r"[\s_]+", "-", s.strip())
-    return re.sub(r"-+", "-", s)
-
-# ── Sync functions ────────────────────────────────────────────────────────────
+# ── Blog posts ────────────────────────────────────────────────────────────────
 
 def sync_posts():
     rows = db_query(BLOG_DB_ID, {
         "filter": {"property": "Status", "select": {"equals": "Published"}},
-        "sorts": [{"property": "Date", "direction": "descending"}],
+        "sorts":  [{"property": "Date", "direction": "descending"}],
     })
     posts = []
     for page in rows:
         p = page["properties"]
         title = prop_title(p["Title"])
-        if not title:
-            continue
-        slug_val = prop_text(p.get("Slug", {}))
-        slug = slug_val if slug_val else slugify(title)
+        if not title: continue
+        slug = prop_text(p.get("Slug", {})) or slugify(title)
         posts.append({
             "id":      slug,
             "title":   title,
             "date":    prop_date(p["Date"]),
-            "tags":    prop_multiselect(p["Tags"]),
+            "tags":    prop_multi(p["Tags"]),
             "excerpt": prop_text(p.get("Excerpt", {})),
             "content": blocks_to_html(page["id"]),
         })
     return posts
 
+# ── Projects ──────────────────────────────────────────────────────────────────
+
 def sync_projects():
     rows = db_query(PROJECT_DB_ID, {
         "filter": {"property": "Status", "select": {"does_not_equal": "Archived"}},
-        "sorts": [{"property": "Order", "direction": "ascending"}],
+        "sorts":  [{"property": "Order", "direction": "ascending"}],
     })
     projects = []
     for page in rows:
         p = page["properties"]
         name = prop_title(p["Name"])
-        if not name:
-            continue
+        if not name: continue
         projects.append({
             "name":        name,
             "description": prop_text(p.get("Description", {})),
@@ -212,7 +257,7 @@ def sync_projects():
             "github":      prop_url(p.get("GitHub", {})),
             "live":        prop_url(p.get("Live", {})),
             "status":      prop_select(p.get("Status", {})),
-            "order":       prop_number(p.get("Order", {})),
+            "order":       prop_num(p.get("Order", {})),
         })
     return projects
 
@@ -225,12 +270,19 @@ if __name__ == "__main__":
     posts = sync_posts()
     with open("data/posts.json", "w", encoding="utf-8") as f:
         json.dump(posts, f, ensure_ascii=False, indent=2)
-    print(f"  ✓ {len(posts)} posts written to data/posts.json")
+    print(f"  ✓ {len(posts)} posts → data/posts.json")
 
     print("Syncing projects…")
     projects = sync_projects()
     with open("data/projects.json", "w", encoding="utf-8") as f:
         json.dump(projects, f, ensure_ascii=False, indent=2)
-    print(f"  ✓ {len(projects)} projects written to data/projects.json")
+    print(f"  ✓ {len(projects)} projects → data/projects.json")
+
+    print("Syncing CV…")
+    cv = sync_cv()
+    with open("data/cv.json", "w", encoding="utf-8") as f:
+        json.dump(cv, f, ensure_ascii=False, indent=2)
+    exp = len(cv["experience"]); edu = len(cv["education"]); skl = len(cv["skills"])
+    print(f"  ✓ {exp} experience, {edu} education, {skl} skill groups → data/cv.json")
 
     print("Done.")
