@@ -3,7 +3,9 @@
     "id": "six-months-at-esa-esoc",
     "title": "Six months at ESA ESOC: what I learned",
     "date": "2026-01-28",
-    "tags": ["Space"],
+    "tags": [
+      "Space"
+    ],
     "excerpt": "From coffee-fuelled orbit determination scripts to CDRs with real stakes — here's what surprised me most.",
     "content": "<p>Six months at ESA ESOC flew by faster than an OPS-SAT pass over Darmstadt. Here's what stuck with me.</p><h2>The pace of real ops is different</h2><p>Student satellite projects have generous margins — you can iterate, rebuild, re-solder. Operational missions are different. The stakes are real: wrong commanding, wrong code, wrong timeline can mean a lost experiment or a damaged asset. Working inside that environment changed how I think about reliability and verification.</p><h2>Orbit determination is harder than the textbooks suggest</h2><p>I spent weeks building a precise orbit determination algorithm from GNSS data. In principle, it's \"just\" least squares with some orbital mechanics. In practice, you're wrestling with measurement noise, clock biases, atmospheric modelling, and data gaps. The final pipeline worked — but I understood deeply why the research literature on this topic is so thick.</p><h2>The people make the place</h2><p>ESOC is genuinely multinational. In any given meeting you might hear four languages in the hallway before it starts. That kind of environment makes you sharper — you have to communicate precisely because assumptions don't always travel well across borders.</p><h2>What's next</h2><p>I'm back in Trondheim finishing my thesis, but the ESA internship confirmed that space operations and systems engineering is where I want to build a career. Next stop: graduation. Then: wherever the best mission is.</p>"
   },
@@ -11,7 +13,9 @@
     "id": "why-every-engineer-should-try-pcb-design",
     "title": "Why I think every engineer should try PCB design",
     "date": "2025-11-10",
-    "tags": ["Engineering"],
+    "tags": [
+      "Engineering"
+    ],
     "excerpt": "You don't have to be a hardware person to benefit from designing a circuit board.",
     "content": "<p>Most software engineers I know have never laid out a PCB. I think that's a shame — not because everyone needs to become a hardware engineer, but because the constraints of physical design make you a better thinker.</p><h2>The discipline of physical constraints</h2><p>When you write software, abstraction layers hide an enormous amount of complexity. Memory is just there. Signals propagate instantly. In PCB design, none of this is true. You have to think about current return paths, trace impedance, thermal dissipation, and manufacturing tolerances all at once. That concreteness is clarifying.</p><h2>The cost of a mistake is real</h2><p>A wrong diode footprint means waiting three weeks for a re-spin. That changes how carefully you review your work. I've become a much better checker of my own work since I started designing PCBs — because I know what shipping a mistake costs.</p><h2>Start somewhere simple</h2><p>You don't need to design a satellite OBC on your first board. Pick a project: a custom USB-C power delivery adapter, a sensor breakout, an LED controller. Use KiCad (free, excellent), order from JLCPCB, and iterate. The first board will have errors. That's fine. The second will be better.</p><p>The best engineers I know understand hardware even if they don't do it every day. Give it a try.</p>"
   }
