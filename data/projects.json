@@ -1,0 +1,56 @@
+[
+  {
+    "name": "SelfieSat / BioSat / FramSat",
+    "description": "End-to-end CubeSat projects with ORBIT NTNU. PCB design, systems engineering, integration, and CDR participation across three satellite missions.",
+    "badge": "SATELLITE",
+    "github": "",
+    "live": "",
+    "status": "Completed",
+    "order": 1
+  },
+  {
+    "name": "Precise Orbit Determination",
+    "description": "Developed an algorithm at ESA ESOC using GNSS data for precise orbit determination on the OPS-SAT mission. Python-based pipeline with real satellite telemetry.",
+    "badge": "GNSS · ORBIT",
+    "github": "",
+    "live": "",
+    "status": "Completed",
+    "order": 2
+  },
+  {
+    "name": "Ship SOS Relay Simulation",
+    "description": "Simulated ship emergency beacons relayed through low-earth-orbit satellites using GNU Radio, Python, and ML models for signal classification.",
+    "badge": "ML · SDR",
+    "github": "",
+    "live": "",
+    "status": "Completed",
+    "order": 3
+  },
+  {
+    "name": "Wobble 2 & Astrogrip",
+    "description": "Contributed electronics design, assembly, and systems testing for two satellite projects at BEARS, TU Berlin during the exchange year.",
+    "badge": "SATELLITE · TUB",
+    "github": "",
+    "live": "",
+    "status": "Completed",
+    "order": 4
+  },
+  {
+    "name": "World Solar Challenge",
+    "description": "Logistics, competition planning, and regulation documentation for Nordlys NTNU's participation in the World Solar Challenge 2025 in Australia.",
+    "badge": "COMPETITION",
+    "github": "",
+    "live": "",
+    "status": "Active",
+    "order": 5
+  },
+  {
+    "name": "Design Thinking & Shared Ignorance",
+    "description": "Co-authored paper on Design Thinking as a Framework for Student–Faculty Partnerships. Published in International Journal for Students as Partners, 2024.",
+    "badge": "RESEARCH",
+    "github": "",
+    "live": "",
+    "status": "Completed",
+    "order": 6
+  }
+]

@@ -4,7 +4,12 @@
       "Bash(gh auth *)",
       "Bash(git config *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "PowerShell(gh auth status)",
+      "mcp__f6df5003-a6bf-4e37-b4f9-93fbb2dac968__notion-search",
+      "mcp__f6df5003-a6bf-4e37-b4f9-93fbb2dac968__notion-fetch",
+      "mcp__f6df5003-a6bf-4e37-b4f9-93fbb2dac968__notion-create-pages",
+      "mcp__f6df5003-a6bf-4e37-b4f9-93fbb2dac968__notion-create-database"
     ]
   }
 }

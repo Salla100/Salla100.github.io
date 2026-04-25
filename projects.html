@@ -33,53 +33,16 @@
     <p style="margin-top:1rem;">A mix of satellite missions, engineering experiments, and research — from PCB spins to orbit.</p>
   </div>
 
-  <section>
+  <section style="padding-top: 0;">
     <div class="reveal">
       <p class="section-label">// featured</p>
       <h2 class="section-title">Missions & projects</h2>
     </div>
-    <div class="projects-grid reveal">
-
-      <div class="project-card">
-        <span class="project-badge">SATELLITE</span>
-        <h3>SelfieSat / BioSat / FramSat</h3>
-        <p>End-to-end CubeSat projects with ORBIT NTNU. PCB design, systems engineering, integration, and CDR participation across three satellite missions.</p>
-      </div>
-
-      <div class="project-card">
-        <span class="project-badge">GNSS · ORBIT</span>
-        <h3>Precise Orbit Determination</h3>
-        <p>Developed an algorithm at ESA ESOC using GNSS data for precise orbit determination on the OPS-SAT mission. Python-based pipeline with real satellite telemetry.</p>
-      </div>
-
-      <div class="project-card">
-        <span class="project-badge">ML · SDR</span>
-        <h3>Ship SOS Relay Simulation</h3>
-        <p>Simulated ship emergency beacons relayed through low-earth-orbit satellites using GNU Radio, Python, and ML models for signal classification.</p>
-      </div>
-
-      <div class="project-card">
-        <span class="project-badge">SATELLITE · TUB</span>
-        <h3>Wobble 2 & Astrogrip</h3>
-        <p>Contributed electronics design, assembly, and systems testing for two satellite projects at BEARS, TU Berlin during the exchange year.</p>
-      </div>
-
-      <div class="project-card">
-        <span class="project-badge">COMPETITION</span>
-        <h3>World Solar Challenge</h3>
-        <p>Logistics, competition planning, and regulation documentation for Nordlys NTNU's participation in the World Solar Challenge 2025 in Australia.</p>
-      </div>
-
-      <div class="project-card">
-        <span class="project-badge">RESEARCH</span>
-        <h3>Design Thinking & Shared Ignorance</h3>
-        <p>Co-authored paper on Design Thinking as a Framework for Student–Faculty Partnerships. Published in International Journal for Students as Partners, 2024.</p>
-      </div>
-
+    <div class="projects-grid reveal" id="projects-grid">
+      <div class="loading">Loading…</div>
     </div>
   </section>
 
-  <!-- PUBLICATION -->
   <section>
     <div class="reveal">
       <p class="section-label">// publication</p>
@@ -99,5 +62,29 @@
 <footer>Built with curiosity · Sven Amberg · Trondheim, Norway</footer>
 
 <script src="js/main.js"></script>
+<script>
+  fetch('data/projects.json')
+    .then(r => r.json())
+    .then(projects => {
+      const grid = document.getElementById('projects-grid');
+      if (!projects.length) { grid.innerHTML = ''; return; }
+      grid.innerHTML = projects.map(p => {
+        const links = [
+          p.github ? `<a href="${p.github}" target="_blank" rel="noopener" style="color:var(--accent3); font-family:var(--font-mono); font-size:12px;">GitHub ↗</a>` : '',
+          p.live   ? `<a href="${p.live}"   target="_blank" rel="noopener" style="color:var(--accent3); font-family:var(--font-mono); font-size:12px;">Live ↗</a>`   : '',
+        ].filter(Boolean).join(' ');
+        return `
+          <div class="project-card">
+            <span class="project-badge">${p.badge}</span>
+            <h3>${p.name}</h3>
+            <p>${p.description}</p>
+            ${links ? `<div style="margin-top:1rem; display:flex; gap:1rem;">${links}</div>` : ''}
+          </div>`;
+      }).join('');
+    })
+    .catch(() => {
+      document.getElementById('projects-grid').innerHTML = '<div class="loading">Could not load projects.</div>';
+    });
+</script>
 </body>
 </html>

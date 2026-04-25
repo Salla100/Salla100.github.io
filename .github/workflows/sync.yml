@@ -1,0 +1,43 @@
+name: Sync from Notion
+
+on:
+  schedule:
+    - cron: '0 2 * * *'   # daily at 02:00 UTC
+  workflow_dispatch:        # allow manual trigger from GitHub Actions tab
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: sync/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r sync/requirements.txt
+
+      - name: Run Notion sync
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+        run: python sync/sync.py
+
+      - name: Commit and push if data changed
+        run: |
+          git config user.name  "notion-sync[bot]"
+          git config user.email "notion-sync[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No changes — nothing to commit."
+          else
+            git commit -m "chore: sync content from Notion [$(date -u '+%Y-%m-%d')]"
+            git push
+          fi
