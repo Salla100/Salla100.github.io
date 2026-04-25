@@ -3,129 +3,170 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sven Amberg</title>
-  <meta name="description" content="Personal website of Sven Amberg — developer, builder, thinker." />
+  <title>Sven Amberg — Space Systems Engineer</title>
+  <meta name="description" content="Space Systems Engineer. Electronics designer. PCB craftsman. Making satellites smarter, from Trondheim to orbit." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
+<canvas id="stars-canvas"></canvas>
+
 <nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Sven<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="cv.html">CV</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="blog.html">Blog</a></li>
-    </ul>
-  </div>
+  <a class="nav-logo" href="index.html">&lt;sven.amberg /&gt;</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a class="nav-cta" href="blog.html">Blog →</a>
 </nav>
 
 <main>
-  <div class="container">
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-tag">Available for new opportunities</div>
-      <h1>Hi, I'm <span class="highlight">Sven Amberg</span></h1>
-      <p class="lead">
-        I build software and explore ideas at the intersection of technology and real-world problems. This is my little corner of the internet.
-      </p>
-      <div class="btn-group">
-        <a href="projects.html" class="btn btn-primary">See my work →</a>
-        <a href="cv.html" class="btn btn-outline">View CV</a>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section class="section">
-      <div class="section-label">About me</div>
-      <p style="color: var(--text-muted); line-height: 1.8; max-width: 600px;">
-        I'm a developer based in [Your Location]. I'm passionate about building things that matter — whether that's a side project I'm obsessing over or a product that ships to real users.
-      </p>
-      <p style="color: var(--text-muted); line-height: 1.8; max-width: 600px; margin-top: 12px;">
-        Outside of code I enjoy [hobbies / interests]. I write occasionally on my <a href="blog.html">blog</a> about things I find interesting.
-      </p>
-    </section>
-
-    <!-- Currently working on -->
-    <section class="section">
-      <div class="section-label">Currently</div>
-      <div class="card-grid">
-        <div class="card" style="display:flex; gap:16px; align-items:flex-start;">
-          <span style="font-size:1.4rem">🚀</span>
-          <div>
-            <div style="font-weight:700; margin-bottom:4px;">Building in public</div>
-            <div style="font-size:0.875rem; color:var(--text-muted);">Working on personal projects and documenting the journey.</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; gap:16px; align-items:flex-start;">
-          <span style="font-size:1.4rem">📖</span>
-          <div>
-            <div style="font-weight:700; margin-bottom:4px;">Learning & Writing</div>
-            <div style="font-size:0.875rem; color:var(--text-muted);">Writing about what I learn on my blog.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Latest posts preview -->
-    <section class="section">
-      <div class="section-label">Latest posts</div>
-      <div class="card-grid" id="home-posts">
-        <div class="loading">Loading posts…</div>
-      </div>
-      <div style="margin-top: 20px;">
-        <a href="blog.html" class="btn btn-outline" style="display:inline-flex;">All posts →</a>
-      </div>
-    </section>
-
-  </div>
-</main>
-
-<footer>
-  <div class="footer-inner">
-    <span class="footer-text">© 2026 Sven Amberg</span>
-    <div class="footer-links">
-      <a href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:your@email.com">Email</a>
+  <!-- HERO -->
+  <div class="hero-section">
+    <p class="hero-eyebrow"><span class="status-dot"></span>Open to opportunities — finishing MSc 2026</p>
+    <h1 class="hero-name">Sven<br><em>Amberg</em></h1>
+    <p class="hero-tagline">Space Systems Engineer. Electronics designer. PCB craftsman. Making satellites smarter, from Trondheim to orbit.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="cv.html">View my experience</a>
+      <a class="btn-ghost" href="#contact">Get in touch</a>
+    </div>
+    <div class="hero-scroll">
+      <span class="scroll-line"></span>
+      Scroll to explore
     </div>
   </div>
-</footer>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="reveal">
+      <p class="section-label">// about</p>
+      <h2 class="section-title">The person<br>behind the PCB</h2>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>I'm a dual Norwegian–German engineer finishing my integrated Master's in <strong>Electronic System Design and Innovation</strong> at NTNU Trondheim, specialising in Space Systems. I thrive at the intersection of hardware precision and systems thinking — I can design a PCB <em>and</em> reason about the whole satellite architecture.</p>
+        <p>From interning at <strong>ESA ESOC</strong> to leading electronics at <strong>ORBIT NTNU</strong> and building satellite payloads at <strong>TU Berlin</strong>, I've been hands-on with every phase: concept, CDR, assembly, integration, and ops.</p>
+        <p>When I'm not soldering or simulating, I'm playing saxophone (16+ years), exploring the outdoors, or falling into a good Sci-Fi novel.</p>
+      </div>
+      <div class="about-facts">
+        <div class="fact">
+          <div class="fact-icon">🎓</div>
+          <div>
+            <div class="fact-label">Currently</div>
+            <div class="fact-value">MSc Electronic System Design, NTNU</div>
+          </div>
+        </div>
+        <div class="fact">
+          <div class="fact-icon">🛰️</div>
+          <div>
+            <div class="fact-label">Last role</div>
+            <div class="fact-value">ESA ESOC — OPS-SAT Intern</div>
+          </div>
+        </div>
+        <div class="fact">
+          <div class="fact-icon">🌍</div>
+          <div>
+            <div class="fact-label">Nationalities</div>
+            <div class="fact-value">Norwegian & German</div>
+          </div>
+        </div>
+        <div class="fact">
+          <div class="fact-icon">🗣️</div>
+          <div>
+            <div class="fact-label">Languages</div>
+            <div class="fact-value">English · Norwegian · German</div>
+          </div>
+        </div>
+        <div class="fact">
+          <div class="fact-icon">📍</div>
+          <div>
+            <div class="fact-label">Based in</div>
+            <div class="fact-value">Trondheim, Norway</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST POSTS -->
+  <section>
+    <div class="reveal">
+      <p class="section-label">// writing</p>
+      <h2 class="section-title">Latest posts</h2>
+    </div>
+    <div class="blog-grid reveal" id="home-posts">
+      <div class="loading">Loading…</div>
+    </div>
+    <div style="margin-top: 1.5rem;" class="reveal">
+      <a href="blog.html" class="btn-ghost">All posts →</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="reveal">
+      <p class="section-label">// contact</p>
+      <h2 class="section-title">Let's connect</h2>
+    </div>
+    <div class="contact-grid reveal">
+      <a class="contact-link" href="mailto:sven.amberg@outlook.com">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">sven.amberg@outlook.com</div>
+        </div>
+      </a>
+      <a class="contact-link" href="tel:+4747801104">
+        <div class="contact-icon">📱</div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+47 478 011 04</div>
+        </div>
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/svenamberg" target="_blank" rel="noopener">
+        <div class="contact-icon">💼</div>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <div class="contact-value">linkedin.com/in/svenamberg</div>
+        </div>
+      </a>
+      <a class="contact-link" href="https://github.com/svenamberg" target="_blank" rel="noopener">
+        <div class="contact-icon">⚙️</div>
+        <div>
+          <div class="contact-label">GitHub</div>
+          <div class="contact-value">github.com/svenamberg</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer>Built with curiosity · Sven Amberg · Trondheim, Norway</footer>
 
 <script src="js/main.js"></script>
 <script>
   fetch('data/posts.json')
     .then(r => r.json())
     .then(posts => {
-      const container = document.getElementById('home-posts');
+      const el = document.getElementById('home-posts');
       const recent = posts.slice(0, 3);
-      if (!recent.length) {
-        container.innerHTML = '<div class="empty-state"><div class="icon">✏️</div>No posts yet.</div>';
-        return;
-      }
-      container.innerHTML = recent.map(p => `
-        <a href="post.html?id=${p.id}" class="card blog-post-item">
-          <div class="post-meta">
-            <span>${formatDate(p.date)}</span>
-            ${p.tags.map(t => `<span class="post-tag">${t}</span>`).join('')}
-          </div>
-          <div class="post-title">${p.title}</div>
-          <div class="post-excerpt">${p.excerpt}</div>
-        </a>
-      `).join('');
+      if (!recent.length) { el.innerHTML = ''; return; }
+      el.innerHTML = recent.map(p => `
+        <a class="blog-card" href="post.html?id=${encodeURIComponent(p.id)}">
+          <div class="blog-date">${formatDate(p.date)}</div>
+          <h3>${p.title}</h3>
+          <p>${p.excerpt}</p>
+          ${p.tags.map(t => `<span class="blog-tag">${t}</span>`).join(' ')}
+        </a>`).join('');
     })
-    .catch(() => {
-      document.getElementById('home-posts').innerHTML = '';
-    });
-
-  function formatDate(d) {
-    return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-  }
+    .catch(() => { document.getElementById('home-posts').innerHTML = ''; });
 </script>
 </body>
 </html>

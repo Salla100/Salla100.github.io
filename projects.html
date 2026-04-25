@@ -4,136 +4,99 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects — Sven Amberg</title>
-  <meta name="description" content="Projects and side projects by Sven Amberg." />
+  <meta name="description" content="Projects and research by Sven Amberg — satellites, orbit determination, signal processing." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
+<canvas id="stars-canvas"></canvas>
+
 <nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Sven<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="cv.html">CV</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="blog.html">Blog</a></li>
-    </ul>
-  </div>
+  <a class="nav-logo" href="index.html">&lt;sven.amberg /&gt;</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a class="nav-cta" href="blog.html">Blog →</a>
 </nav>
 
 <main>
-  <div class="container">
 
-    <section class="hero">
-      <div class="hero-tag">Side projects & work</div>
-      <h1>Projects</h1>
-      <p class="lead">Things I've built, am building, or shipped. A mix of professional work and personal experiments.</p>
-    </section>
-
-    <!-- Featured -->
-    <section class="section">
-      <div class="section-label">Featured</div>
-      <div class="card-grid card-grid-2">
-
-        <div class="card project-card">
-          <div class="project-card-top">
-            <span class="project-icon">🚀</span>
-            <div class="project-links">
-              <a href="#" class="icon-link" title="GitHub" target="_blank" rel="noopener">⬡</a>
-              <a href="#" class="icon-link" title="Live demo" target="_blank" rel="noopener">↗</a>
-            </div>
-          </div>
-          <div>
-            <div class="project-name">Project Alpha</div>
-            <div class="project-desc">A short description of what this project does and why it's interesting. What problem does it solve?</div>
-          </div>
-          <div class="tag-list">
-            <span class="tag">React</span>
-            <span class="tag">Node.js</span>
-            <span class="tag">PostgreSQL</span>
-          </div>
-        </div>
-
-        <div class="card project-card">
-          <div class="project-card-top">
-            <span class="project-icon">🛠️</span>
-            <div class="project-links">
-              <a href="#" class="icon-link" title="GitHub" target="_blank" rel="noopener">⬡</a>
-              <a href="#" class="icon-link" title="Live demo" target="_blank" rel="noopener">↗</a>
-            </div>
-          </div>
-          <div>
-            <div class="project-name">Project Beta</div>
-            <div class="project-desc">Another project description. Highlight what makes it technically interesting or what you learned building it.</div>
-          </div>
-          <div class="tag-list">
-            <span class="tag">Python</span>
-            <span class="tag">FastAPI</span>
-            <span class="tag">Docker</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Other projects -->
-    <section class="section">
-      <div class="section-label">Other projects</div>
-      <div class="card-grid">
-
-        <div class="card project-card" style="flex-direction:row; align-items:flex-start; gap:16px;">
-          <span class="project-icon" style="padding-top:2px;">🔬</span>
-          <div style="flex:1;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-              <div class="project-name">Experiment / Tool</div>
-              <div class="project-links">
-                <a href="#" class="icon-link" title="GitHub" target="_blank" rel="noopener">⬡</a>
-              </div>
-            </div>
-            <div class="project-desc">A smaller experiment or utility tool. Could be a script, CLI, or tiny service.</div>
-            <div class="tag-list" style="margin-top:8px;">
-              <span class="tag tag-neutral">Python</span>
-              <span class="tag tag-neutral">CLI</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card project-card" style="flex-direction:row; align-items:flex-start; gap:16px;">
-          <span class="project-icon" style="padding-top:2px;">📦</span>
-          <div style="flex:1;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-              <div class="project-name">Open Source Contribution</div>
-              <div class="project-links">
-                <a href="#" class="icon-link" title="GitHub" target="_blank" rel="noopener">⬡</a>
-              </div>
-            </div>
-            <div class="project-desc">A contribution to an open source project or a small library you maintain.</div>
-            <div class="tag-list" style="margin-top:8px;">
-              <span class="tag tag-neutral">TypeScript</span>
-              <span class="tag tag-neutral">Open Source</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
+  <div class="page-hero">
+    <p class="section-label">// projects</p>
+    <h1>Things I've<br><em style="font-style:italic; color:var(--accent);">shipped</em></h1>
+    <p style="margin-top:1rem;">A mix of satellite missions, engineering experiments, and research — from PCB spins to orbit.</p>
   </div>
+
+  <section>
+    <div class="reveal">
+      <p class="section-label">// featured</p>
+      <h2 class="section-title">Missions & projects</h2>
+    </div>
+    <div class="projects-grid reveal">
+
+      <div class="project-card">
+        <span class="project-badge">SATELLITE</span>
+        <h3>SelfieSat / BioSat / FramSat</h3>
+        <p>End-to-end CubeSat projects with ORBIT NTNU. PCB design, systems engineering, integration, and CDR participation across three satellite missions.</p>
+      </div>
+
+      <div class="project-card">
+        <span class="project-badge">GNSS · ORBIT</span>
+        <h3>Precise Orbit Determination</h3>
+        <p>Developed an algorithm at ESA ESOC using GNSS data for precise orbit determination on the OPS-SAT mission. Python-based pipeline with real satellite telemetry.</p>
+      </div>
+
+      <div class="project-card">
+        <span class="project-badge">ML · SDR</span>
+        <h3>Ship SOS Relay Simulation</h3>
+        <p>Simulated ship emergency beacons relayed through low-earth-orbit satellites using GNU Radio, Python, and ML models for signal classification.</p>
+      </div>
+
+      <div class="project-card">
+        <span class="project-badge">SATELLITE · TUB</span>
+        <h3>Wobble 2 & Astrogrip</h3>
+        <p>Contributed electronics design, assembly, and systems testing for two satellite projects at BEARS, TU Berlin during the exchange year.</p>
+      </div>
+
+      <div class="project-card">
+        <span class="project-badge">COMPETITION</span>
+        <h3>World Solar Challenge</h3>
+        <p>Logistics, competition planning, and regulation documentation for Nordlys NTNU's participation in the World Solar Challenge 2025 in Australia.</p>
+      </div>
+
+      <div class="project-card">
+        <span class="project-badge">RESEARCH</span>
+        <h3>Design Thinking & Shared Ignorance</h3>
+        <p>Co-authored paper on Design Thinking as a Framework for Student–Faculty Partnerships. Published in International Journal for Students as Partners, 2024.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PUBLICATION -->
+  <section>
+    <div class="reveal">
+      <p class="section-label">// publication</p>
+      <h2 class="section-title">Research</h2>
+    </div>
+    <div class="pub-card reveal">
+      <div class="pub-year">2024</div>
+      <div>
+        <div class="pub-title">Design Thinking and Shared Ignorance as a Framework for Student–Faculty Partnerships</div>
+        <div class="pub-journal">International Journal for Students as Partners</div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<footer>
-  <div class="footer-inner">
-    <span class="footer-text">© 2026 Sven Amberg</span>
-    <div class="footer-links">
-      <a href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:your@email.com">Email</a>
-    </div>
-  </div>
-</footer>
+<footer>Built with curiosity · Sven Amberg · Trondheim, Norway</footer>
 
 <script src="js/main.js"></script>
 </body>

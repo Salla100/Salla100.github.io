@@ -4,139 +4,202 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CV — Sven Amberg</title>
-  <meta name="description" content="CV and résumé of Sven Amberg." />
+  <meta name="description" content="CV and experience of Sven Amberg — Space Systems Engineer." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
+<canvas id="stars-canvas"></canvas>
+
 <nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Sven<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="cv.html">CV</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="blog.html">Blog</a></li>
-    </ul>
-  </div>
+  <a class="nav-logo" href="index.html">&lt;sven.amberg /&gt;</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a class="nav-cta" href="blog.html">Blog →</a>
 </nav>
 
 <main>
-  <div class="container">
 
-    <section class="hero">
-      <div class="hero-tag">Open to work</div>
-      <h1>Curriculum Vitae</h1>
-      <p class="lead">My background, experience, and skills.</p>
-      <div class="btn-group">
-        <a href="assets/cv.pdf" class="btn btn-primary" download>Download PDF ↓</a>
-        <a href="mailto:your@email.com" class="btn btn-outline">Get in touch</a>
-      </div>
-    </section>
-
-    <!-- Experience -->
-    <section class="section">
-      <div class="section-label">Experience</div>
-      <div class="timeline">
-
-        <div class="timeline-item">
-          <div class="timeline-date">2024 — Present</div>
-          <div>
-            <div class="timeline-title">Job Title</div>
-            <div class="timeline-company">Company Name</div>
-            <div class="timeline-desc">
-              Describe what you did here. Keep it punchy — outcomes over responsibilities. Numbers help.
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">2022 — 2024</div>
-          <div>
-            <div class="timeline-title">Previous Job Title</div>
-            <div class="timeline-company">Previous Company</div>
-            <div class="timeline-desc">
-              Brief description of your role and key achievements. What did you ship? What improved?
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-date">2020 — 2022</div>
-          <div>
-            <div class="timeline-title">Earlier Role</div>
-            <div class="timeline-company">Earlier Company</div>
-            <div class="timeline-desc">
-              Description of responsibilities and accomplishments in this role.
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Education -->
-    <section class="section">
-      <div class="section-label">Education</div>
-      <div class="timeline">
-
-        <div class="timeline-item">
-          <div class="timeline-date">2016 — 2020</div>
-          <div>
-            <div class="timeline-title">Degree Name</div>
-            <div class="timeline-company">University / Institution</div>
-            <div class="timeline-desc">
-              Field of study. Notable projects, thesis, or achievements.
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Skills -->
-    <section class="section">
-      <div class="section-label">Skills</div>
-      <div style="margin-bottom: 20px;">
-        <div class="section-title" style="font-size:1rem; margin-bottom:12px; color: var(--text-muted); font-weight:600;">Languages & Frameworks</div>
-        <div class="skills-grid">
-          <div class="skill-item">⚡ JavaScript</div>
-          <div class="skill-item">🐍 Python</div>
-          <div class="skill-item">⚛️ React</div>
-          <div class="skill-item">🟢 Node.js</div>
-          <div class="skill-item">🦀 Rust</div>
-          <div class="skill-item">🏗️ TypeScript</div>
-        </div>
-      </div>
-      <div style="margin-bottom: 20px;">
-        <div class="section-title" style="font-size:1rem; margin-bottom:12px; color: var(--text-muted); font-weight:600;">Tools & Platforms</div>
-        <div class="skills-grid">
-          <div class="skill-item">🐳 Docker</div>
-          <div class="skill-item">☁️ AWS</div>
-          <div class="skill-item">🔧 Git</div>
-          <div class="skill-item">🗄️ PostgreSQL</div>
-          <div class="skill-item">🚀 Vercel</div>
-          <div class="skill-item">🔄 CI/CD</div>
-        </div>
-      </div>
-    </section>
-
-  </div>
-</main>
-
-<footer>
-  <div class="footer-inner">
-    <span class="footer-text">© 2026 Sven Amberg</span>
-    <div class="footer-links">
-      <a href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:your@email.com">Email</a>
+  <div class="page-hero">
+    <p class="section-label">// curriculum vitae</p>
+    <h1>Where I've been,<br><em style="font-style:italic; color:var(--accent);">what I've built</em></h1>
+    <p style="margin-top:1rem;">My background, experience, and skills. Available for opportunities from 2026.</p>
+    <div style="margin-top:2rem; display:flex; gap:1rem; flex-wrap:wrap;">
+      <a href="assets/cv.pdf" class="btn-primary" download>Download PDF ↓</a>
+      <a href="mailto:sven.amberg@outlook.com" class="btn-ghost">Get in touch</a>
     </div>
   </div>
-</footer>
+
+  <!-- EXPERIENCE -->
+  <section>
+    <div class="reveal">
+      <p class="section-label">// experience</p>
+      <h2 class="section-title">Roles</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">Sep 2025 – Jan 2026</div>
+        <div class="timeline-role">OPS-SAT Space Lab Intern</div>
+        <div class="timeline-org">ESA ESOC — Darmstadt, Germany</div>
+        <div class="timeline-desc">
+          <ul>
+            <li>Developed precise orbit determination algorithm using GNSS data</li>
+            <li>Supported experimenters running experiments on live satellites</li>
+            <li>Supported satellite design through CDR and IRR phases</li>
+            <li>Set up testbenches for OPS-SAT satellite systems</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">Summer 2023</div>
+        <div class="timeline-role">Summer Engineering Intern</div>
+        <div class="timeline-org">Space Norway — Oslo, Norway</div>
+        <div class="timeline-desc">
+          <ul>
+            <li>Researched and simulated use of in-house satellites as ship SOS relays</li>
+            <li>Used GNU Radio, Python, and ML to simulate ship SOS and satellite movements</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">2020 – 2023</div>
+        <div class="timeline-role">CFO & Electronics Engineer</div>
+        <div class="timeline-org">ORBIT NTNU — Student satellite organisation</div>
+        <div class="timeline-desc">
+          <ul>
+            <li>Led key accounts team; managed budget exceeding 1M NOK during SelfieSat launch</li>
+            <li>Designed PCB for BioSat; electronics design, soldering, cabling</li>
+            <li>Led electronics design for Sub-Orbital team in 2020</li>
+            <li>Built payload for Propulse NTNU — <strong>1st place</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">2023 – 2024</div>
+        <div class="timeline-role">Electronics & Systems Engineer</div>
+        <div class="timeline-org">BEARS at TU Berlin — Exchange year</div>
+        <div class="timeline-desc">
+          Electronics design, assembly, testing, and system design for Wobble 2 and Astrogrip satellite projects.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section>
+    <div class="reveal">
+      <p class="section-label">// education</p>
+      <h2 class="section-title">Studies</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">2020 – 2026</div>
+        <div class="timeline-role">Integrated Master's in Electronic System Design and Innovation</div>
+        <div class="timeline-org">NTNU — Trondheim, Norway</div>
+        <div class="timeline-desc">
+          Specialisation in Space Systems. Topics: PCB design, IoT, GNSS, signal processing, satellite design, systems engineering. Year abroad at TU Berlin (2023–24).
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="reveal">
+      <p class="section-label">// skills</p>
+      <h2 class="section-title">What I work with</h2>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <h4>Electronics</h4>
+        <div class="skill-tags">
+          <span class="tag">PCB design</span>
+          <span class="tag">Altium</span>
+          <span class="tag">KiCad</span>
+          <span class="tag">Soldering</span>
+          <span class="tag">Assembly</span>
+          <span class="tag">Testing</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Systems</h4>
+        <div class="skill-tags">
+          <span class="tag">Systems engineering</span>
+          <span class="tag">SysML</span>
+          <span class="tag">Integration</span>
+          <span class="tag">CDR/IRR</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Software</h4>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">GNU Radio</span>
+          <span class="tag">C++</span>
+          <span class="tag">MATLAB</span>
+          <span class="tag">Verilog</span>
+          <span class="tag">TensorFlow</span>
+          <span class="tag">Git</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Space</h4>
+        <div class="skill-tags">
+          <span class="tag">GNSS</span>
+          <span class="tag">Orbit determination</span>
+          <span class="tag">Satellite ops</span>
+          <span class="tag">Payload dev</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h4>Signal / ML</h4>
+        <div class="skill-tags">
+          <span class="tag">Signal processing</span>
+          <span class="tag">Machine learning</span>
+          <span class="tag">IoT</span>
+          <span class="tag">FEM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATION -->
+  <section>
+    <div class="reveal">
+      <p class="section-label">// publication</p>
+      <h2 class="section-title">Research</h2>
+    </div>
+    <div class="pub-card reveal">
+      <div class="pub-year">2024</div>
+      <div>
+        <div class="pub-title">Design Thinking and Shared Ignorance as a Framework for Student–Faculty Partnerships</div>
+        <div class="pub-journal">International Journal for Students as Partners</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Built with curiosity · Sven Amberg · Trondheim, Norway</footer>
 
 <script src="js/main.js"></script>
 </body>

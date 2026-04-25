@@ -6,54 +6,36 @@
   <title>Post — Sven Amberg</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
+<canvas id="stars-canvas"></canvas>
+
 <nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo">Sven<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="cv.html">CV</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="blog.html">Blog</a></li>
-    </ul>
-  </div>
+  <a class="nav-logo" href="index.html">&lt;sven.amberg /&gt;</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="cv.html">CV</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="blog.html">Blog</a></li>
+  </ul>
+  <a class="nav-cta" href="blog.html">Blog →</a>
 </nav>
 
 <main>
-  <div class="container">
-    <div id="post-container">
-      <div class="loading" style="padding-top: 80px;">Loading…</div>
-    </div>
-  </div>
+  <section id="post-container" style="padding-top: 8rem; min-height: 80vh;">
+    <div class="loading">Loading…</div>
+  </section>
 </main>
 
-<footer>
-  <div class="footer-inner">
-    <span class="footer-text">© 2026 Sven Amberg</span>
-    <div class="footer-links">
-      <a href="https://github.com/YOUR_USERNAME" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://linkedin.com/in/YOUR_USERNAME" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:your@email.com">Email</a>
-    </div>
-  </div>
-</footer>
+<footer>Built with curiosity · Sven Amberg · Trondheim, Norway</footer>
 
 <script src="js/main.js"></script>
 <script>
-  function formatDate(d) {
-    return new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  }
-
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('id');
-
-  if (!id) {
-    window.location.href = 'blog.html';
-  }
+  const id = new URLSearchParams(window.location.search).get('id');
+  if (!id) window.location.href = 'blog.html';
 
   fetch('data/posts.json')
     .then(r => r.json())
@@ -63,39 +45,27 @@
 
       if (!post) {
         container.innerHTML = `
-          <div class="hero">
-            <h1>Post not found</h1>
-            <p class="lead">This post doesn't exist or was removed.</p>
-            <a href="blog.html" class="btn btn-outline" style="margin-top:8px;">← Back to blog</a>
-          </div>`;
+          <a class="post-back" href="blog.html">← Back to blog</a>
+          <p style="color:var(--muted);">Post not found.</p>`;
         return;
       }
 
       document.title = `${post.title} — Sven Amberg`;
 
+      const tags = (post.tags || []).map(t => `<span class="blog-tag">${t}</span>`).join(' ');
+
       container.innerHTML = `
-        <div class="hero" style="padding-bottom: 32px;">
-          <a href="blog.html" style="font-size:0.85rem; color:var(--text-subtle); display:inline-flex; align-items:center; gap:4px; margin-bottom:24px;">
-            ← All posts
-          </a>
-          <div class="post-meta" style="margin-bottom: 16px;">
-            <span>${formatDate(post.date)}</span>
-            ${post.tags.map(t => `<span class="post-tag">${t}</span>`).join('')}
-          </div>
-          <h1 style="font-size: clamp(1.6rem, 4vw, 2.4rem);">${post.title}</h1>
-        </div>
-        <section class="section" style="border-top: 1px solid var(--border); padding-top: 40px;">
-          <div class="post-content">
-            ${post.content}
-          </div>
-        </section>
-        <div style="padding: 40px 0 20px;">
-          <a href="blog.html" class="btn btn-outline">← Back to blog</a>
+        <a class="post-back" href="blog.html">← Back to blog</a>
+        <div class="post-date">${formatDate(post.date)} &nbsp;·&nbsp; ${tags}</div>
+        <h1 class="post-title-h">${post.title}</h1>
+        <div class="post-body">${post.content}</div>
+        <div style="margin-top:3rem; padding-top:2rem; border-top:0.5px solid var(--border);">
+          <a class="post-back" href="blog.html">← Back to blog</a>
         </div>`;
     })
     .catch(() => {
       document.getElementById('post-container').innerHTML =
-        '<div class="empty-state" style="padding-top:80px;"><p>Could not load post.</p></div>';
+        '<div class="loading">Could not load post.</div>';
     });
 </script>
 </body>
