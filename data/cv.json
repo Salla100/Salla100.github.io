@@ -8,7 +8,9 @@
         "Developed precise orbit determination algorithm using GNSS data",
         "Supported experimenters running experiments on live satellites",
         "Supported satellite design through CDR and IRR phases",
-        "Set up testbenches for OPS-SAT satellite systems"
+        "Set up testbenches for OPS-SAT satellite systems",
+        "Reworked logistics and heightened workflow efficency",
+        "Created outreach material, helping reaching many new potential experimenters"
       ],
       "desc": ""
     },
@@ -52,11 +54,56 @@
     }
   ],
   "skills": [
-    { "category": "Electronics", "items": ["PCB design", "Altium", "KiCad", "Soldering", "Assembly", "Testing"] },
-    { "category": "Systems",     "items": ["Systems engineering", "SysML", "Integration", "CDR/IRR"] },
-    { "category": "Software",    "items": ["Python", "GNU Radio", "C++", "MATLAB", "Verilog", "TensorFlow", "Git"] },
-    { "category": "Space",       "items": ["GNSS", "Orbit determination", "Satellite ops", "Payload dev"] },
-    { "category": "Signal / ML", "items": ["Signal processing", "Machine learning", "IoT", "FEM"] }
+    {
+      "category": "Electronics",
+      "items": [
+        "PCB design",
+        "Altium",
+        "KiCad",
+        "Soldering",
+        "Assembly",
+        "Testing"
+      ]
+    },
+    {
+      "category": "Systems",
+      "items": [
+        "Systems engineering",
+        "SysML",
+        "Integration",
+        "CDR/IRR"
+      ]
+    },
+    {
+      "category": "Software",
+      "items": [
+        "Python",
+        "GNU Radio",
+        "C++",
+        "MATLAB",
+        "Verilog",
+        "TensorFlow",
+        "Git"
+      ]
+    },
+    {
+      "category": "Space",
+      "items": [
+        "GNSS",
+        "Orbit determination",
+        "Satellite ops",
+        "Payload dev"
+      ]
+    },
+    {
+      "category": "Signal / ML",
+      "items": [
+        "Signal processing",
+        "Machine learning",
+        "IoT",
+        "FEM"
+      ]
+    }
   ],
   "publication": {
     "year": "2024",
