@@ -42,6 +42,18 @@
       "dates": "2023 – 2024",
       "bullets": [],
       "desc": "Electronics design, assembly, testing, and system design for Wobble 2 and Astrogrip satellite projects."
+    },
+    {
+      "title": "Systems Engineer",
+      "org": "RISE at TU Berlin — Exchange year",
+      "dates": "2023 – 2024",
+      "bullets": [
+        "Systems engineer for a powered exoskeleton enabling paraplegic people to walk",
+        "Ensured medical requirements, safety protocols, and testing procedures were defined and followed",
+        "Coordinated system integration across mechanical, electrical, and software subsystems",
+        "Competed in Cybathlon 2024 — international competition for assistive technology"
+      ],
+      "desc": ""
     }
   ],
   "education": [
