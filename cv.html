@@ -29,6 +29,20 @@
   <a class="nav-cta" href="blog.html">Blog →</a>
 </nav>
 
+<!-- ── Satellite Uplink Mini-Game ── -->
+<div id="cv-game-overlay">
+  <div class="game-wrapper">
+    <p class="section-label">// authentication required</p>
+    <h2 class="game-title">Establish Satellite<br><em style="font-style:italic; color:var(--accent);">Uplink</em></h2>
+    <p class="game-subtitle">Lock onto all 3 orbital signals to access the mission data</p>
+    <div class="game-area">
+      <canvas id="game-canvas"></canvas>
+    </div>
+    <span id="game-lock-counter">0 / 3 signals locked</span>
+    <button class="btn-ghost" id="game-skip" style="font-size:13px; padding:0.5rem 1.25rem;">Skip → view CV directly</button>
+  </div>
+</div>
+
 <main>
 
   <div class="page-hero">
@@ -95,40 +109,48 @@
     }).join('');
   }
 
-  fetch('data/cv.json')
-    .then(r => r.json())
-    .then(cv => {
-      if (cv.experience && cv.experience.length) {
-        document.getElementById('experience-timeline').innerHTML = renderTimeline(cv.experience);
-        document.getElementById('experience-section').style.display = '';
-      }
-      if (cv.education && cv.education.length) {
-        document.getElementById('education-timeline').innerHTML = renderTimeline(cv.education);
-        document.getElementById('education-section').style.display = '';
-      }
-      if (cv.skills && cv.skills.length) {
-        document.getElementById('skills-grid').innerHTML = cv.skills.map(s => `
-          <div class="skill-card">
-            <h4>${s.category}</h4>
-            <div class="skill-tags">${s.items.map(i => `<span class="tag">${i}</span>`).join('')}</div>
-          </div>`).join('');
-        document.getElementById('skills-section').style.display = '';
-      }
-      if (cv.publication) {
-        document.getElementById('pub-card').innerHTML = `
-          <div class="pub-year">${cv.publication.year}</div>
-          <div>
-            <div class="pub-title">${cv.publication.title}</div>
-            <div class="pub-journal">${cv.publication.journal}</div>
-          </div>`;
-        document.getElementById('pub-section').style.display = '';
-      }
-      // Re-run scroll reveal on newly added elements
-      document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
-        new IntersectionObserver(([e]) => { if (e.isIntersecting) e.target.classList.add('visible'); }, { threshold: 0.1 }).observe(el);
-      });
-    })
-    .catch(err => console.error('Failed to load cv.json', err));
+  // Called by the mini-game (or skip button) to reveal the CV
+  window.loadCV = function () {
+    fetch('data/cv.json')
+      .then(r => r.json())
+      .then(cv => {
+        if (cv.experience && cv.experience.length) {
+          document.getElementById('experience-timeline').innerHTML = renderTimeline(cv.experience);
+          document.getElementById('experience-section').style.display = '';
+        }
+        if (cv.education && cv.education.length) {
+          document.getElementById('education-timeline').innerHTML = renderTimeline(cv.education);
+          document.getElementById('education-section').style.display = '';
+        }
+        if (cv.skills && cv.skills.length) {
+          document.getElementById('skills-grid').innerHTML = cv.skills.map(s => `
+            <div class="skill-card">
+              <h4>${s.category}</h4>
+              <div class="skill-tags">${s.items.map(i => `<span class="tag">${i}</span>`).join('')}</div>
+            </div>`).join('');
+          document.getElementById('skills-section').style.display = '';
+        }
+        if (cv.publication) {
+          document.getElementById('pub-card').innerHTML = `
+            <div class="pub-year">${cv.publication.year}</div>
+            <div>
+              <div class="pub-title">${cv.publication.title}</div>
+              <div class="pub-journal">${cv.publication.journal}</div>
+            </div>`;
+          document.getElementById('pub-section').style.display = '';
+        }
+        // Kick off scroll-reveal for newly inserted elements
+        document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+          new IntersectionObserver(([e]) => {
+            if (e.isIntersecting) e.target.classList.add('visible');
+          }, { threshold: 0.1 }).observe(el);
+        });
+        // Scroll to top of CV content
+        document.querySelector('.page-hero').scrollIntoView({ behavior: 'smooth' });
+      })
+      .catch(err => console.error('Failed to load cv.json', err));
+  };
 </script>
+<script src="js/cv-game.js"></script>
 </body>
 </html>

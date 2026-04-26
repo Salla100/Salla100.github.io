@@ -52,13 +52,22 @@
 
   <!-- HERO -->
   <div class="hero-section">
-    <p class="hero-eyebrow"><span class="status-dot"></span>Open to opportunities — finishing MSc 2026</p>
-    <h1 class="hero-name">Sven<br><em>Amberg</em></h1>
-    <p class="hero-tagline">Space Systems Engineer. Electronics designer. PCB craftsman. Making satellites smarter, from Trondheim to orbit.</p>
-    <div class="hero-cta">
-      <a class="btn-primary" href="cv.html">View my experience</a>
-      <a class="btn-ghost" href="#contact">Get in touch</a>
+    <div class="hero-content">
+      <p class="hero-eyebrow"><span class="status-dot"></span>Open to opportunities — finishing MSc 2026</p>
+      <h1 class="hero-name">Sven<br><em>Amberg</em></h1>
+      <p class="hero-tagline">Space Systems Engineer. Electronics designer. PCB craftsman. Making satellites smarter, from Trondheim to orbit.</p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="cv.html">View my experience</a>
+        <a class="btn-ghost" href="#contact">Get in touch</a>
+      </div>
     </div>
+
+    <!-- Orbital visualisation — hover PCB → Projects, ♪ → Blog -->
+    <div class="hero-orbit" aria-hidden="true">
+      <canvas id="orbit-canvas"></canvas>
+      <p class="orbit-label">// orbital simulation</p>
+    </div>
+
     <div class="hero-scroll">
       <span class="scroll-line"></span>
       Scroll to explore
@@ -160,6 +169,7 @@
 <footer>Built with curiosity · Sven Amberg · Trondheim, Norway</footer>
 
 <script src="js/main.js"></script>
+<script src="js/orbit.js"></script>
 <script>
   fetch('data/posts.json')
     .then(r => r.json())
