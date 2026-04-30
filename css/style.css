@@ -423,7 +423,9 @@ section {
   color: var(--accent);
   min-width: 60px;
 }
-.pub-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; }
+.pub-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; display: block; }
+a.pub-title { color: var(--text); text-decoration: none; transition: color 0.2s; }
+a.pub-title:hover { color: var(--accent); }
 .pub-journal { font-size: 13px; color: var(--accent3); font-style: italic; }
 
 /* ── Contact ── */
