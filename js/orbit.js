@@ -16,16 +16,16 @@
   let W, H, CX, CY, EARTH_R;
 
   function setupCanvas() {
-    W  = wrap.offsetWidth;
-    H  = wrap.offsetHeight || window.innerHeight;
+    // Use viewport dimensions — most reliable since the canvas covers 100vh/100vw.
+    // CSS inset:0 controls the display size; we only set the pixel buffer here.
+    W  = window.innerWidth;
+    H  = window.innerHeight;
     CX = W / 2;
     CY = H / 2;
     EARTH_R = Math.min(W, H) * 0.042;
 
-    canvas.width  = W * DPR;
-    canvas.height = H * DPR;
-    canvas.style.width  = W + 'px';
-    canvas.style.height = H + 'px';
+    canvas.width  = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   }
 
