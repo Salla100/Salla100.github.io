@@ -16,16 +16,23 @@
   let W, H, CX, CY, EARTH_R;
 
   function setupCanvas() {
-    // Use viewport dimensions — most reliable since the canvas covers 100vh/100vw.
-    // CSS inset:0 controls the display size; we only set the pixel buffer here.
+    // Always use viewport dimensions — avoids relying on containing-block
+    // layout which can be 0 at script-execution time.
     W  = window.innerWidth;
     H  = window.innerHeight;
     CX = W / 2;
     CY = H / 2;
     EARTH_R = Math.min(W, H) * 0.042;
 
+    // Set the pixel buffer (internal resolution)
     canvas.width  = Math.round(W * DPR);
     canvas.height = Math.round(H * DPR);
+
+    // Set the CSS display size explicitly — canvas intrinsic sizing
+    // fights CSS inset/stretch rules on some browsers, so we own it here.
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
   }
 
@@ -555,8 +562,12 @@
   }
 
   // ── Init & resize ────────────────────────────────────────────────────
-  setupCanvas();
-  requestAnimationFrame(render);
+  // Defer to next animation frame so layout has settled and
+  // window.innerWidth/Height reflect the true viewport.
+  requestAnimationFrame(() => {
+    setupCanvas();
+    requestAnimationFrame(render);
+  });
 
   window.addEventListener('resize', () => {
     setupCanvas();

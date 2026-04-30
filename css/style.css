@@ -114,11 +114,12 @@ section {
 /* ── Orbital canvas — full-background ── */
 #orbit-canvas {
   position: absolute;
-  inset: 0;           /* fill the hero-wrapper in all directions */
+  top: 0;
+  left: 0;
   pointer-events: none;
   z-index: 0;
   display: block;
-  /* display size is set by CSS inset; JS only sets the pixel buffer */
+  /* width + height are set explicitly by orbit.js */
 }
 
 /* ── Hero ── */
