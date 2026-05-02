@@ -54,6 +54,19 @@ def notion_post(path, body):
     r.raise_for_status()
     return r.json()
 
+def notion_patch(path, body):
+    r = requests.patch(f"https://api.notion.com/v1{path}", headers=HEADERS, json=body)
+    r.raise_for_status()
+    return r.json()
+
+def mark_published_in_notion(page_id):
+    """Set the Status property of a Notion page to 'Published'."""
+    notion_patch(f"/pages/{page_id}", {
+        "properties": {
+            "Status": {"select": {"name": "Published"}}
+        }
+    })
+
 def db_query(db_id, body):
     results, cursor = [], None
     while True:
@@ -293,6 +306,8 @@ def sync_posts():
 
     for row in to_release:
         released_ids.append(row["id"])
+        mark_published_in_notion(row["id"])
+        print(f"  ↳ Marked '{prop_title(row['properties']['Title'])}' as Published in Notion")
 
     schedule["released_ids"] = released_ids
     save_schedule(schedule)
