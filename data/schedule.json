@@ -1,6 +1,8 @@
 {
   "interval_days": 7,
   "queue_start": "2026-05-03",
-  "released_ids": [],
+  "released_ids": [
+    "3545ca8d-b920-8122-b25c-ce5bdd2b095b"
+  ],
   "_hint": "released_ids tracks which Notion page IDs have been released from the Scheduled queue. queue_start is when the weekly clock began. Change interval_days to alter cadence; change queue_start to shift the whole schedule."
 }
