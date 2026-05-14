@@ -59,11 +59,12 @@ def notion_patch(path, body):
     r.raise_for_status()
     return r.json()
 
-def mark_published_in_notion(page_id):
-    """Set the Status property of a Notion page to 'Published'."""
+def mark_published_in_notion(page_id, release_date):
+    """Set Status to 'Published' and Date to the computed release date."""
     notion_patch(f"/pages/{page_id}", {
         "properties": {
-            "Status": {"select": {"name": "Published"}}
+            "Status": {"select": {"name": "Published"}},
+            "Date":   {"date": {"start": release_date}},
         }
     })
 
@@ -304,10 +305,12 @@ def sync_posts():
     queue        = [r for r in sched_rows if r["id"] not in released_set]
     to_release   = queue[:newly_releasable]
 
-    for row in to_release:
+    for i, row in enumerate(to_release):
+        slot_index   = already_released + i
+        release_date = (queue_start + datetime.timedelta(days=(slot_index + 1) * interval)).isoformat()
         released_ids.append(row["id"])
-        mark_published_in_notion(row["id"])
-        print(f"  ↳ Marked '{prop_title(row['properties']['Title'])}' as Published in Notion")
+        mark_published_in_notion(row["id"], release_date)
+        print(f"  ↳ Marked '{prop_title(row['properties']['Title'])}' as Published in Notion ({release_date})")
 
     schedule["released_ids"] = released_ids
     save_schedule(schedule)
