@@ -7,7 +7,7 @@ Blog post scheduling
 --------------------
 Posts with Status = "Published"  → go live immediately (always included).
 Posts with Status = "Scheduled"  → enter the release queue.
-                                   One post is released per interval_days.
+                                   One post is released per interval_days (default: 3, ~twice a week).
                                    Oldest-created Notion page publishes first.
 
 The schedule state is stored in data/schedule.json and committed to git
@@ -256,7 +256,7 @@ def load_schedule():
         with open(SCHEDULE_PATH, encoding="utf-8") as f:
             return json.load(f)
     return {
-        "interval_days": 7,
+        "interval_days": 3,
         "queue_start": datetime.date.today().isoformat(),
         "released_ids": [],
         "_hint": (
