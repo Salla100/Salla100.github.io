@@ -1,5 +1,15 @@
 [
   {
+    "id": "building-websites-with-ai",
+    "title": "Building Websites with AI is Faster Than You Expect",
+    "date": "2026-05-17",
+    "tags": [
+      "Engineering"
+    ],
+    "excerpt": "AI changes how websites are built—faster iteration, tighter feedback loops, and more experimentation.",
+    "content": "<p>I built this website with AI assistance. Not just boilerplate — a full static site with a custom orbital simulation as the hero background, a radar mini-game gating the CV, a blog with automated weekly scheduling, and a Notion-to-JSON sync pipeline. Things that would have taken weeks of evening sessions took days.</p><p>Here's what I actually learned from the process.</p><h2>The old way</h2><p>A few years ago, building a personal site from scratch meant choosing between learning a framework properly or stitching together tutorials. Either way, you'd spend as much time fighting tooling as actually building. Webpack configs, CSS specificity wars, an afternoon lost to a Canvas DPI bug with nothing to show for it.</p><h2>What actually changed</h2><p>AI tools don't eliminate the hard parts — they compress them dramatically. You describe what you want, get a working first draft quickly, and when something breaks, you explain the symptom and get a targeted fix instead of sifting through documentation and forum posts.</p><p>The real shift is in how fast the feedback loop becomes. Instead of planning everything upfront to avoid costly mistakes, you try things. Doesn't work? Iterate. Want to add eight orbiting objects — satellites, a saxophone, a Game Boy — as a full-viewport canvas background? Sure, try it. The experimentation cost is low enough that it becomes fun again.</p><h2>What it doesn't replace</h2><p>Understanding still matters. When the canvas kept rendering in the wrong position, I needed to know enough about how browsers handle intrinsic element sizing versus CSS-controlled sizing to describe the problem clearly. The AI gave me the fix — but I had to know what to ask.</p><p>You also have to review what gets generated. Not everything is right. Edge cases get missed, and sometimes the approach is technically correct but wrong for your specific situation. The output is a starting point, not a final answer.</p><h2>The honest summary</h2><p>AI-assisted development feels like working with a fast, knowledgeable collaborator who never gets tired. It's not a replacement for understanding how things work — it's an accelerant. The more context you bring, the better the output.</p><p>If you've been putting off a project because the ramp-up felt too steep, the ramp is genuinely shorter than it used to be. Start small and see where it takes you.</p>"
+  },
+  {
     "id": "playing-instrument-years",
     "title": "Why Playing an Instrument for Years Changes You",
     "date": "2026-05-02",
