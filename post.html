@@ -1,9 +1,21 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Post — Sven Amberg</title>
+  <meta name="description" content="" />
+  <meta property="og:type"        content="article" />
+  <meta property="og:url"         content="" />
+  <meta property="og:title"       content="" />
+  <meta property="og:description" content="" />
+  <meta property="og:image"       content="https://svenamberg.com/assets/og-image.jpg" />
+  <link rel="canonical"           href="" />
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:title"      content="" />
+  <meta name="twitter:description" content="" />
+  <meta name="twitter:image"      content="https://svenamberg.com/assets/og-image.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Cabinet+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet" />
@@ -51,6 +63,18 @@
       }
 
       document.title = `${post.title} — Sven Amberg`;
+
+      // Populate all SEO meta tags dynamically
+      const _url  = window.location.href;
+      const _desc = post.excerpt || '';
+      function sm(sel, attr, val) { const el = document.querySelector(sel); if (el) el.setAttribute(attr, val); }
+      sm('meta[name="description"]',         'content', _desc);
+      sm('meta[property="og:url"]',          'content', _url);
+      sm('meta[property="og:title"]',        'content', post.title);
+      sm('meta[property="og:description"]',  'content', _desc);
+      sm('meta[name="twitter:title"]',       'content', post.title);
+      sm('meta[name="twitter:description"]', 'content', _desc);
+      sm('link[rel="canonical"]',            'href',    _url);
 
       const tags = (post.tags || []).map(t => `<span class="blog-tag">${t}</span>`).join(' ');
 

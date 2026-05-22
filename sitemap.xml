@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   sitemap.xml — svenamberg.com
-  Generated: 2026-05-21
+  Generated: 2026-05-22
   Covers: main site pages + all subdomain tools linked from Mission Control
   Subdomain entries are annotated with their GitHub repo.
 -->
@@ -14,7 +14,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://svenamberg.com/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -22,7 +22,7 @@
   <!-- CV — updated infrequently, high value page -->
   <url>
     <loc>https://svenamberg.com/cv.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -30,7 +30,7 @@
   <!-- Projects portfolio -->
   <url>
     <loc>https://svenamberg.com/projects.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -38,7 +38,7 @@
   <!-- Blog index -->
   <url>
     <loc>https://svenamberg.com/blog.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -46,29 +46,36 @@
   <!-- Mission Control — tools hub, updated as tools are added -->
   <url>
     <loc>https://svenamberg.com/tools.html</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- Blog posts — static once published -->
   <url>
+    <loc>https://svenamberg.com/post.html?id=building-websites-with-ai</loc>
+    <lastmod>2026-05-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
     <loc>https://svenamberg.com/post.html?id=six-months-at-esa-esoc</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://svenamberg.com/post.html?id=playing-instrument-years</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://svenamberg.com/post.html?id=why-every-engineer-should-try-pcb-design</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -80,7 +87,7 @@
   <!-- Salla100/space-launch-tracker — real-time launch countdowns -->
   <url>
     <loc>https://launches.svenamberg.com/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -88,7 +95,7 @@
   <!-- Salla100/iss-tracker — real-time ISS position -->
   <url>
     <loc>https://iss.svenamberg.com/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -96,7 +103,7 @@
   <!-- Salla100/satellite-passes — satellite pass predictions by location -->
   <url>
     <loc>https://passes.svenamberg.com/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -108,7 +115,7 @@
   <!-- Salla100/space-opportunity-tracker — jobs, grants, fellowships -->
   <url>
     <loc>https://opportunities.svenamberg.com/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -116,7 +123,7 @@
   <!-- Salla100/space-careers — career path guide for the space sector -->
   <url>
     <loc>https://careers.svenamberg.com/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -128,7 +135,7 @@
   <!-- Salla100/daily-space-journey — daily space content and mission milestones -->
   <url>
     <loc>https://journey.svenamberg.com/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -136,7 +143,7 @@
   <!-- Salla100/space-vault — curated space-themed recommendations with affiliate links -->
   <url>
     <loc>https://vault.svenamberg.com/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -144,7 +151,7 @@
   <!-- Salla100/space-unit-converter — astronomical and orbital unit conversions -->
   <url>
     <loc>https://convert.svenamberg.com/</loc>
-    <lastmod>2026-05-21</lastmod>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
