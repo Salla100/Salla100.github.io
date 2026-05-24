@@ -3,7 +3,11 @@
   "queue_start": "2026-05-03",
   "released_ids": [
     "3545ca8d-b920-8122-b25c-ce5bdd2b095b",
-    "3545ca8d-b920-8163-a39a-fd53a74b0792"
+    "3545ca8d-b920-8163-a39a-fd53a74b0792",
+    "3545ca8d-b920-8167-af1f-ccaa2d6d2866",
+    "3545ca8d-b920-817e-b3a4-da457e59109c",
+    "3545ca8d-b920-8192-adb0-f53f38996d37",
+    "3545ca8d-b920-81a1-86cc-e81de9f3e631"
   ],
   "_hint": "released_ids tracks which Notion page IDs have been released from the Scheduled queue. queue_start is when the weekly clock began. Change interval_days to alter cadence; change queue_start to shift the whole schedule."
 }
