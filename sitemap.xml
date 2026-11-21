@@ -108,6 +108,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Salla100/space-stocks — European space company stock overview -->
+  <url>
+    <loc>https://stocks.svenamberg.com/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- ═══════════════════════════════════════════════════
        SUBDOMAIN TOOLS — career & discovery
   ════════════════════════════════════════════════════ -->
