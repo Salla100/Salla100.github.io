@@ -116,6 +116,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Salla100/space-companies — European space infrastructure company directory -->
+  <url>
+    <loc>https://companies.svenamberg.com/</loc>
+    <lastmod>2026-11-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- ═══════════════════════════════════════════════════
        SUBDOMAIN TOOLS — career & discovery
   ════════════════════════════════════════════════════ -->
